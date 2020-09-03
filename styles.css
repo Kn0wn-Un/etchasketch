@@ -1,0 +1,38 @@
+h1{
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+}
+.main{
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    margin-left: 100px;
+}
+#sketchArea{
+    height: 750px;
+    width: 750px;
+    display: grid; 
+    margin: 75px 50px 0px 0px;
+    text-align: center; 
+    border: 2px solid black;
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+}
+.grid-item {
+    text-align: center;
+    border: 0.1px solid black;
+    margin:0 -1px -1px 0; 
+}
+#controls{
+    display: flex;
+    flex-direction: column;
+    height: 750px;
+    margin : 100px 0px 0px 0px;
+}
+button{
+    justify-content: flex-start;
+    font-size: 35px;
+    text-align: center;
+    text-justify: center;
+    margin: 10px 0px 10px 0px;
+}
