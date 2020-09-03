@@ -1,5 +1,5 @@
 makeframe();
-function makeframe(numGrids = 100){
+function makeframe(numGrids = 4){
     area = document.querySelector("#sketchArea");
     let rows="";
     let col="";
@@ -11,15 +11,40 @@ function makeframe(numGrids = 100){
     area.style["grid-template-columns"] = col;
     area.style["grid-template-rows"] = rows;
     for(let i = 1; i <= numGrids**2; i++){
-        box = document.createElement("div");
-        box.setAttribute("id", ""+i);
+        let box = document.createElement("div");
+        box.setAttribute("value", "btn-black");
         box.classList.add("grid-item");
         box.addEventListener("mouseover", (e) => {
             e.target.style.backgroundColor = "black";
         });
         area.appendChild(box);
     }
+    let btn = document.querySelector("#toggle");
+    btn.style.backgroundColor="black";
+    btn.style.color="white";
 
 }
-btn = document.querySelector("#clear");
+let btn = document.querySelector("#clear");
 btn.addEventListener("click", ()=>{location.reload()});
+btn = document.querySelector("#toggle");
+btn.addEventListener("click", ()=>{
+    let box = document.querySelectorAll(".grid-item");
+    box.forEach(one => {
+            if(one.getAttribute("value") === "btn-black"){
+                one.setAttribute("value", "btn-white");
+                one.addEventListener("mouseover", (e) => {
+                    e.target.style.backgroundColor = "white";
+                });
+                btn.style.backgroundColor="white";
+                btn.style.color="black";
+            }
+            else{
+                one.setAttribute("value", "btn-black");
+                one.addEventListener("mouseover", (e) => {
+                       e.target.style.backgroundColor = "black";
+                });
+                btn.style.backgroundColor="black";
+                btn.style.color="white";
+            }
+    });
+});
