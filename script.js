@@ -1,6 +1,10 @@
-makeFrame();
-function makeFrame(numGrids = 4){
-    area = document.querySelector("#sketchArea");
+let btn = document.querySelector("#clear");
+btn.addEventListener("click", ()=>{location.reload()});
+
+
+function makeFrame(numGrids = 16){
+    let area = document.querySelector("#sketchArea");
+    area.setAttribute("value", "white");
     let rows="";
     let col="";
     for(let i = 0; i < numGrids; i++)
@@ -12,43 +16,57 @@ function makeFrame(numGrids = 4){
     area.style["grid-template-rows"] = rows;
     for(let i = 1; i <= numGrids**2; i++){
         let box = document.createElement("div");
-        box.setAttribute("value", "btn-black");
+        box.setAttribute("value", "0");
         box.classList.add("grid-item");
-        box.addEventListener("mouseover", (e) => {
-            e.target.style.backgroundColor = "black";
-        });
+        box.style.backgroundColor = "rgba(255, 255, 255, 0)"
         area.appendChild(box);
     }
     let btn = document.querySelector("#toggle");
-    btn.style.backgroundColor="black";
-    btn.style.color="white";
-
+    toggleColor()
 }
-let btn = document.querySelector("#clear");
-btn.addEventListener("click", ()=>{location.reload()});
+makeFrame();
+
+
+
+
 btn = document.querySelector("#toggle");
-btn.addEventListener("click", ()=>{
+btn.addEventListener("click", toggleColor);
+function toggleColor(){
     let box = document.querySelectorAll(".grid-item");
+    let area = document.querySelector("#sketchArea");
+    let btnn = document.querySelector("#toggle");
     box.forEach(one => {
-            let btn = document.querySelector("#toggle");
-            if(one.getAttribute("value") === "btn-black"){
-                one.setAttribute("value", "btn-white");
-                one.addEventListener("mouseover", (e) => {
-                    e.target.style.backgroundColor = "white";
-                });
-                btn.style.backgroundColor="white";
-                btn.style.color="black";
-            }
-            else{
-                one.setAttribute("value", "btn-black");
-                one.addEventListener("mouseover", (e) => {
-                       e.target.style.backgroundColor = "black";
-                });
-                btn.style.backgroundColor="black";
-                btn.style.color="white";
-            }
+            one.addEventListener("mouseover", colorChanger);
     });
-});
+    if(area.getAttribute("value") === "black"){
+        area.setAttribute("value", "white");
+        btnn.style.backgroundColor="white";
+        btnn.style.color="black";
+    }
+    else{
+        area.setAttribute("value", "black");
+        btnn.style.backgroundColor="black";
+        btnn.style.color="white";
+    }
+}
+function colorChanger(){
+    console.log(this.style.backgroundColor)
+    let area = document.querySelector("#sketchArea");
+    if(area.getAttribute("value") === "black"){
+        this.style.backgroundColor = "rgba(0, 0, 0, 1)";
+        this.setAttribute("value", "1");
+    }
+    else{
+        this.style.backgroundColor = "rgba(255, 255, 255, 0)"; 
+        this.setAttribute("value", "0");
+    }   
+}
+
+
+
+
+btn = document.querySelector("#rows");
+btn.addEventListener("click", getInput);
 function getInput(){
     rows = prompt("Enter the number of Rows(same as Columns)","16");
     if(!rows){
@@ -61,5 +79,28 @@ function getInput(){
     }
     makeFrame(rows);
 }
-btn = document.querySelector("#rows");
-btn.addEventListener("click", ()=>getInput());
+
+
+btn = document.querySelector("#gray");
+btn.addEventListener("click", grey);
+function grey(){
+    let box = document.querySelectorAll(".grid-item");
+    box.forEach(one => {
+        one.removeEventListener("mouseover", colorChanger);
+        one.addEventListener("mouseover", setRgba);
+    });
+}
+function setRgba(){
+    aValue = parseFloat(this.getAttribute("value"));
+    aValue += (1/10);
+    aValue = aValue.toFixed(1);
+    if(aValue > 0.9){
+        this.style.backgroundColor = "rgba(0, 0, 0, 1)";
+        this.setAttribute("value", "1");
+        return;
+    }  
+    console.log(aValue);
+    this.style.backgroundColor = "rgba(0, 0, 0, "+ aValue + ")"; 
+    this.setAttribute("value", aValue);
+}
+ 
