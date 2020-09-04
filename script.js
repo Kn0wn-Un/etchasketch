@@ -1,5 +1,5 @@
-makeframe();
-function makeframe(numGrids = 4){
+makeFrame();
+function makeFrame(numGrids = 4){
     area = document.querySelector("#sketchArea");
     let rows="";
     let col="";
@@ -30,6 +30,7 @@ btn = document.querySelector("#toggle");
 btn.addEventListener("click", ()=>{
     let box = document.querySelectorAll(".grid-item");
     box.forEach(one => {
+            let btn = document.querySelector("#toggle");
             if(one.getAttribute("value") === "btn-black"){
                 one.setAttribute("value", "btn-white");
                 one.addEventListener("mouseover", (e) => {
@@ -48,3 +49,17 @@ btn.addEventListener("click", ()=>{
             }
     });
 });
+function getInput(){
+    rows = prompt("Enter the number of Rows(same as Columns)","16");
+    if(!rows){
+        return;
+    }
+    if(rows > 100)
+    {
+        alert("Rows exceeding max value");
+        return;
+    }
+    makeFrame(rows);
+}
+btn = document.querySelector("#rows");
+btn.addEventListener("click", ()=>getInput());
