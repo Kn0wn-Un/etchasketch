@@ -1,6 +1,8 @@
 h1{
     text-align: center;
-    margin: 50px 0px 0px 0px;
+    margin: 25px 0px 0px 0px;
+    position: relative;
+    left: -10px;
 }
 .main{
     display: flex; 
@@ -9,10 +11,10 @@ h1{
     margin-left: 250px;
 }
 #sketchArea{
-    height: 750px;
-    width: 750px;
+    height: 700px;
+    width: 700px;
     display: grid; 
-    margin: 50px 50px 0px 0px;
+    margin: 25px 50px 0px 0px;
     text-align: center; 
     border: 2px solid black;
     border-bottom: 3px solid black;
@@ -30,8 +32,32 @@ h1{
     margin : 100px 0px 0px 0px;
 }
 button{
-    justify-content: flex-start;
     font-size: 35px;
     text-align: center;
     margin: 10px 0px 10px 0px;
+}
+@media screen and ( max-height: 700px ),  ( max-width: 1224px )
+{
+    h1{
+        margin: 10px 0px 0px 0px;
+        left: 5px;
+    }
+    #sketchArea{
+        height: 300px;
+        width: 300px;
+        margin: 15px 0px 0px 0px;
+        position: relative;
+        left: -50px;
+    }
+    #controls{
+        display: flex;
+        flex-direction: column;
+        height: 350px;
+        margin : 15px 0px 0px 0px;
+    }
+    button{
+        font-size: 17px;
+        text-align: center;
+        margin: 5px 0px 5px 0px;
+    }
 }
