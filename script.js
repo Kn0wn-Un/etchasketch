@@ -31,7 +31,7 @@ makeFrame();
 btn = document.querySelector("#rows");
 btn.addEventListener("click", getInput);
 function getInput(){
-    rows = prompt("Enter the number of Rows(same as Columns)","16");
+    rows = parseInt(prompt("Enter the number of Rows(same as Columns)","16"));
     if(!rows){
         return;
     }
